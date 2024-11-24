@@ -8,12 +8,3 @@ admin.site.register(Message)
 
 
 
-
-
-
-##abdullah yorum satirlar
-
-
-#### biraz daha yorumsatir
-### asdjkfalksjdflkasjdlf
-

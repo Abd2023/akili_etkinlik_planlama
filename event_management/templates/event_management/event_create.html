@@ -7,11 +7,23 @@
 </head>
 <body>
     <h1>Create a New Event</h1>
+    
     <form method="post">
         {% csrf_token %}
+        
+        <!-- Display Non-Field Errors (e.g., Time Conflicts) -->
+        {% if form.non_field_errors %}
+            <ul class="errorlist">
+                {% for error in form.non_field_errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
         {{ form.as_p }}
         <button type="submit">Create Event</button>
     </form>
+    
     <p><a href="{% url 'event_list' %}">Back to Event List</a></p>
 </body>
 </html>

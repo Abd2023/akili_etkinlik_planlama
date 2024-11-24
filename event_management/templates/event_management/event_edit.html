@@ -1,8 +1,29 @@
-<!-- event_management/event_edit.html -->
-<h1>Edit Event: {{ event.name }}</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
-</form>
-<a href="{% url 'event_detail' event.id %}">Back to Event Details</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event</title>
+</head>
+<body>
+    <h1>Edit Event: {{ event.name }}</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Display Non-Field Errors (e.g., Time Conflicts) -->
+        {% if form.non_field_errors %}
+            <ul class="errorlist">
+                {% for error in form.non_field_errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+    
+    <p><a href="{% url 'event_detail' event.id %}">Back to Event Details</a></p>
+</body>
+</html>
