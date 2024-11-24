@@ -17,3 +17,4 @@ admin.site.register(Message)
 #### biraz daha yorumsatir
 ### asdjkfalksjdflkasjdlf
 
+#riyaz in yorum satiri
