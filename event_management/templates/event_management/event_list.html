@@ -1,0 +1,18 @@
+<!-- event_management/event_list.html -->
+<h1>Event List</h1>
+<a href="{% url 'event_create' %}">Create a New Event</a>
+<ul>
+    {% for event, is_participant in events_with_participation %}
+        <li>
+            <strong><a href="{% url 'event_detail' event.id %}">{{ event.name }}</a></strong><br>
+            <em>Location:</em> {{ event.location }}<br>
+            <em>Date:</em> {{ event.date }} - {{ event.start_time }} to {{ event.end_time }}<br>
+            {% if is_participant %}
+                <a href="{% url 'leave_event' event.id %}">Leave Event</a>
+            {% else %}
+                <a href="{% url 'join_event' event.id %}">Join Event</a>
+            {% endif %}
+            | <a href="{% url 'event_edit' event.id %}">Edit Event</a>
+        </li>
+    {% endfor %}
+</ul>

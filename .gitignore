@@ -1,0 +1,26 @@
+# Exclude system files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Exclude browser data and caches
+AppData/
+node_modules/
+
+# Exclude Python virtual environments
+venv/
+env/
+
+# Exclude compiled files and bytecode
+*.pyc
+__pycache__/
+
+# Exclude SQLite database (optional if you're using SQLite)
+db.sqlite3
+
+# Exclude environment variables
+.env
+
+# Exclude VS Code settings (optional)
+.vscode/
