@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from event_management.views import home  # Import the home view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +25,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name='login'),  # Add login URL
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),  # Add logout URL
     path('events/', include('event_management.urls')),  # Include event_management URLs under /events/
+    path('home/', home, name='home'),  # Add the home view
+    
 
 ]

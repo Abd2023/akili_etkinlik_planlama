@@ -11,6 +11,32 @@ from django.core.exceptions import ValidationError
 
 
 
+@login_required
+def home(request):
+    user = request.user
+
+    # Step 1: Get user's interests
+    user_interests = user.interests.split(", ") if user.interests else []
+
+    # Step 2: Get past participation categories
+    participated_events = Participant.objects.filter(user=user).select_related('event')
+    participated_categories = {event.event.category for event in participated_events}
+
+    # Step 3: Recommend events based on interests and exclude already joined events
+    recommended_events = Event.objects.filter(
+        category__in=user_interests
+    ).exclude(id__in=participated_events.values_list('event_id', flat=True))
+
+    # Step 4: Prioritize events matching frequent categories
+    recommended_events = sorted(
+        recommended_events,
+        key=lambda event: event.category in participated_categories,
+        reverse=True
+    )
+
+    return render(request, 'home.html', {'recommended_events': recommended_events})
+
+
 # Function to check time conflicts
 def check_time_conflicts(new_event):
     """
