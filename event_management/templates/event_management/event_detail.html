@@ -6,3 +6,5 @@
 <p><strong>Time:</strong> {{ event.start_time }} to {{ event.end_time }}</p>
 <a href="{% url 'event_edit' event.id %}">Edit Event</a>
 <a href="{% url 'event_list' %}">Back to Event List</a>
+<a href="{% url 'chat:messaging_panel' event.id %}">Join Chat</a>
+

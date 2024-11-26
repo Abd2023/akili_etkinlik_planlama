@@ -27,5 +27,6 @@ urlpatterns = [
     path('events/', include('event_management.urls')),  # Include event_management URLs under /events/
     path('home/', home, name='home'),  # Add the home view
     path('events/', include('event_management.urls')),
+    path('chat/', include('chat.urls', namespace='chat')),  # Add this line
 
 ]

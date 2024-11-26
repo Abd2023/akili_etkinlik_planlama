@@ -73,13 +73,17 @@ def event_create(request):
     return render(request, 'event_management/event_create.html', {'form': form})
 
 
+def get_unread_message_count(user, event):
+    return event.messages.exclude(read_by=user).count()
+
 def event_list(request):
     events = Event.objects.all()
     events_with_participation = []
     
     for event in events:
         is_participant = Participant.objects.filter(user=request.user, event=event).exists()
-        events_with_participation.append((event, is_participant))
+        unread_count = get_unread_message_count(request.user, event)
+        events_with_participation.append((event, is_participant, unread_count))
     
     return render(request, 'event_management/event_list.html', {
         'events_with_participation': events_with_participation,

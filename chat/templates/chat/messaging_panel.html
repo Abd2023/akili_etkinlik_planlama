@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Chat</title>
+</head>
+<body>
+    <h1>Event Chat</h1>
+
+    <div>
+        <h2>Chat for {{ event.name }}</h2>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>
+                        <strong>{{ message.sender.username }}</strong>: {{ message.content }}
+                        <br><small>{{ message.timestamp }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No messages yet.</p>
+        {% endif %}
+    </div>
+    
+
+    <!-- Message History Section -->
+    <div id="messageHistory" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto;">
+        {% for message in messages %}
+            <div>
+                <strong>{{ message.sender.username }}:</strong> {{ message.content }}
+                <span style="font-size: 0.8em; color: gray;">({{ message.timestamp|date:"Y-m-d H:i" }})</span>
+            </div>
+        {% empty %}
+            <p>No messages yet. Start the conversation!</p>
+        {% endfor %}
+    </div>
+
+    <!-- New Message Form -->
+    <form id="messageForm" method="POST">
+        {% csrf_token %}
+        <textarea name="content" id="content" rows="3" placeholder="Write a message..." required></textarea><br>
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        // Handle form submission via AJAX
+        document.getElementById("messageForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const content = document.getElementById("content").value;
+            if (!content.trim()) {
+                alert("Message cannot be empty.");
+                return;
+            }
+
+            const response = await fetch("{% url 'chat:send_message' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+                body: JSON.stringify({
+                    event_id: {{ event.id }},
+                    content: content,
+                }),
+            });
+
+            if (response.ok) {
+                const message = await response.json();
+                const messageHistory = document.getElementById("messageHistory");
+                const newMessage = `
+                    <div>
+                        <strong>${message.sender}:</strong> ${message.content}
+                        <span style="font-size: 0.8em; color: gray;">(${message.timestamp})</span>
+                    </div>
+                `;
+                messageHistory.innerHTML += newMessage;
+                document.getElementById("content").value = ""; // Clear the form
+                messageHistory.scrollTop = messageHistory.scrollHeight; // Scroll to the bottom
+            } else {
+                alert("Error sending message. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
