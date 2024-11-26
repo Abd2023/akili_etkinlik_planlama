@@ -55,6 +55,7 @@ def check_time_conflicts(new_event):
 
 
 
+@login_required
 def event_create(request):
     if request.method == 'POST':
         form = EventForm(request.POST)
@@ -67,9 +68,15 @@ def event_create(request):
                 form.add_error(None, "This event conflicts with an existing event.")
             else:
                 event.save()
+
+                # Award points for event creation
+                request.user.total_points += 15
+                request.user.save()
+
                 return redirect('event_list')
     else:
         form = EventForm()
+
     return render(request, 'event_management/event_create.html', {'form': form})
 
 
@@ -94,8 +101,17 @@ def event_list(request):
 @login_required
 def join_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
-    Participant.objects.get_or_create(user=request.user, event=event)
+    participant, created = Participant.objects.get_or_create(user=request.user, event=event)
+
+    if created:  # Only award points for first-time participation
+        request.user.total_points += 10  # Add points for participation
+        if not request.user.first_participation_bonus_awarded:  # First participation bonus
+            request.user.total_points += 20
+            request.user.first_participation_bonus_awarded = True
+        request.user.save()
+
     return redirect('event_list')
+
 
 @login_required
 def leave_event(request, event_id):

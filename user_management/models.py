@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from event_management.models import Event, Participant  # Import related models
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
@@ -29,6 +30,19 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    total_points = models.IntegerField(default=0)
+    first_participation_bonus_awarded = models.BooleanField(default=False)
+
+    def calculate_total_points(self):
+        """
+        Calculate and update the user's total points based on participation,
+        event creation, and first participation bonus.
+        """
+        participation_points = Participant.objects.filter(user=self).count() * 10
+        creation_points = Event.objects.filter(created_by=self).count() * 15
+        bonus_points = 20 if self.first_participation_bonus_awarded else 0
+        self.total_points = participation_points + creation_points + bonus_points
+        self.save()
 
     objects = CustomUserManager()
 
