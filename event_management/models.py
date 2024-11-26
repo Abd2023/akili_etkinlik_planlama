@@ -9,8 +9,12 @@ class Event(models.Model):
     location = models.CharField(max_length=255)
     category = models.CharField(max_length=50)  # e.g., music, sports, technology
     date = models.DateField()
+    
     start_time = models.TimeField()
     end_time = models.TimeField()
+    latitude = models.FloatField(default=0.0)
+    longitude = models.FloatField(default=0.0)
+
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -26,6 +26,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),  # Add logout URL
     path('events/', include('event_management.urls')),  # Include event_management URLs under /events/
     path('home/', home, name='home'),  # Add the home view
-    
+    path('events/', include('event_management.urls')),
 
 ]

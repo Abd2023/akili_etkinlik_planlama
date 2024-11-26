@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from .forms import EventForm
 from .models import Event
-
+from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
+import json
 
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -9,6 +11,8 @@ from .models import  Participant
 
 from django.core.exceptions import ValidationError
 
+import requests
+from django.http import JsonResponse
 
 
 @login_required
@@ -119,3 +123,34 @@ def event_edit(request, event_id):
     else:
         form = EventForm(instance=event)
     return render(request, 'event_management/event_edit.html', {'form': form, 'event': event})
+
+
+def map_view(request):
+    events = Event.objects.exclude(latitude=0.0, longitude=0.0).values("name", "latitude", "longitude", "location", "date", "start_time", "description")
+    events_json = json.dumps(list(events), cls=DjangoJSONEncoder)  # Ensure this is JSON serializable
+    return render(request, 'event_management/map_view.html', {
+    'events': events_json,
+    'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY
+})
+
+
+
+def get_route(request):
+    start = request.GET.get('start')
+    end_lat = request.GET.get('end_lat')
+    end_lng = request.GET.get('end_lng')
+    mode = request.GET.get('mode', 'driving')  # Default to driving
+
+    api_key = "5b3ce3597851110001cf6248b6e2696755f94c61bb3be94cc88b13d1"  # Replace with your API key
+    url = f"https://api.openrouteservice.org/v2/directions/{mode}"
+    headers = {"Authorization": api_key}
+    params = {
+        "start": start,
+        "end": f"{end_lng},{end_lat}",
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+    if response.status_code == 200:
+        return JsonResponse(response.json())
+    else:
+        return JsonResponse({"error": "Unable to fetch route"}, status=500)
