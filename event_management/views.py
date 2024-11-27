@@ -174,3 +174,12 @@ def get_route(request):
         return JsonResponse(response.json())
     else:
         return JsonResponse({"error": "Unable to fetch route"}, status=500)
+
+
+
+def event_map(request):
+    events = Event.objects.values('name', 'latitude', 'longitude', 'location', 'date', 'start_time', 'description')
+    
+    print(list(events))  # Ensure this outputs the expected data
+    events_serialized = json.dumps(list(events), cls=DjangoJSONEncoder) 
+    return render(request, 'event_management/map.html', {'events': events_serialized})
