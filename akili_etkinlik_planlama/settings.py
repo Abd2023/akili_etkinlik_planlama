@@ -68,7 +68,7 @@ ROOT_URLCONF = 'akili_etkinlik_planlama.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Ensure this is pointing to the correct path
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +80,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 
 WSGI_APPLICATION = 'akili_etkinlik_planlama.wsgi.application'
@@ -130,7 +131,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+# The directory where `collectstatic` will store the static files
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Directories where Django will search for additional static files
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # You can add more directories if needed
+]
+
+# Media files (user-uploaded content)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -142,7 +155,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-GOOGLE_MAPS_API_KEY = "AlzaSy-tHO5caZi4LhDsnwUJUOGvOda7MwWdUPi"
+GOOGLE_MAPS_API_KEY = "AlzaSyumJ8Pcy6e4mtYpw6spU2Qn79XX_2sGrlG"
 
 
 

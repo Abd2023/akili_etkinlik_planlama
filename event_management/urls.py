@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:event_id>/leave/', views.leave_event, name='leave_event'),
     path('home/', views.home, name='home'),
     path('map/', views.map_view, name='map_view'), 
+    
 ]

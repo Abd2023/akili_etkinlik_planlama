@@ -18,6 +18,10 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(username, email, password, **extra_fields)
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    ROLE_CHOICES = [
+        ('user', 'User'),
+        ('admin', 'Admin'),
+    ]
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30, blank=True)
@@ -32,6 +36,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     total_points = models.IntegerField(default=0)
     first_participation_bonus_awarded = models.BooleanField(default=False)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')  # Added inside the class
 
     def calculate_total_points(self):
         """
@@ -51,3 +56,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+

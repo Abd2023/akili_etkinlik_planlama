@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Report</title>
+</head>
+<body>
+    <h1>Admin Report</h1>
+    <p><strong>Total Users:</strong> {{ total_users }}</p>
+    <p><strong>Total Events:</strong> {{ total_events }}</p>
+    <p><strong>Active Events:</strong> {{ active_events }}</p>
+
+    <h2>Top 10 Users by Points</h2>
+    <ul>
+        {% for user in top_users_by_points %}
+            <li>{{ user.username }}: {{ user.total_points }} points</li>
+        {% empty %}
+            <li>No users available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
