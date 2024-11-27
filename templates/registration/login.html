@@ -1,16 +1,48 @@
-<!-- registration/login.html -->
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Giriş Yap / Kayıt Ol</title>
+    <link rel="stylesheet" href="{% static 'css/login_register.css' %}">
 </head>
 <body>
-    <h1>Login</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    <div class="container" id="container">
+        <!-- Sol Panel -->
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>Hesap Oluştur</h1>
+                <input type="text" placeholder="Kullanıcı Adı" />
+                <input type="email" placeholder="E-posta" />
+                <input type="password" placeholder="Şifre" />
+                <button>Kayıt Ol</button>
+            </form>
+        </div>
+        <!-- Sağ Panel -->
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Giriş Yap</h1>
+                <input type="email" placeholder="E-posta" />
+                <input type="password" placeholder="Şifre" />
+                <button>Giriş Yap</button>
+            </form>
+        </div>
+        <!-- Overlay Panel -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Tekrar Hoş Geldin!</h1>
+                    <p>Zaten bir hesabın varsa giriş yapabilirsin</p>
+                    <button class="ghost" id="signIn">Giriş Yap</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Merhaba, Arkadaş!</h1>
+                    <p>Bizimle birlikte maceraya başlamak için kayıt ol</p>
+                    <button class="ghost" id="signUp">Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/login_register.js' %}"></script>
 </body>
 </html>
