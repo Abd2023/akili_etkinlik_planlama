@@ -4,14 +4,13 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 class Event(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    location = models.CharField(max_length=255)
-    category = models.CharField(max_length=50)  # e.g., music, sports, technology
+    name = models.CharField(max_length=100)
+    category = models.CharField(max_length=50)
+    location = models.CharField(max_length=100)
     date = models.DateField()
-    
     start_time = models.TimeField()
     end_time = models.TimeField()
+    description = models.TextField(null=True, blank=True)
     latitude = models.FloatField(default=0.0)
     longitude = models.FloatField(default=0.0)
 

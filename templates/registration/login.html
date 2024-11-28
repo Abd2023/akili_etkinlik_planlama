@@ -10,21 +10,23 @@
     <div class="container" id="container">
         <!-- Sol Panel -->
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
                 <h1>Hesap Oluştur</h1>
-                <input type="text" placeholder="Kullanıcı Adı" />
-                <input type="email" placeholder="E-posta" />
-                <input type="password" placeholder="Şifre" />
-                <button>Kayıt Ol</button>
+                <input type="text" name="username" placeholder="Kullanıcı Adı" required />
+                <input type="email" name="email" placeholder="E-posta" required />
+                <input type="password" name="password" placeholder="Şifre" required />
+                <button type="submit">Kayıt Ol</button>
             </form>
         </div>
         <!-- Sağ Panel -->
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
                 <h1>Giriş Yap</h1>
-                <input type="email" placeholder="E-posta" />
-                <input type="password" placeholder="Şifre" />
-                <button>Giriş Yap</button>
+                <input type="text" name="username" placeholder="Kullanıcı Adı" required />
+                <input type="password" name="password" placeholder="Şifre" required />
+                <button type="submit">Giriş Yap</button>
             </form>
         </div>
         <!-- Overlay Panel -->

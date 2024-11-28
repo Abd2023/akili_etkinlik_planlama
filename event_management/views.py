@@ -15,6 +15,9 @@ import requests
 from django.http import JsonResponse
 
 
+
+
+
 @login_required
 def home(request):
     user = request.user
@@ -39,6 +42,8 @@ def home(request):
     )
 
     return render(request, 'home.html', {'recommended_events': recommended_events})
+
+
 
 
 # Function to check time conflicts

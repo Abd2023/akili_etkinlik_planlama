@@ -48,7 +48,7 @@ AUTH_USER_MODEL = 'user_management.CustomUser'
 
 LOGIN_URL = '/login/'  # Update this to your login page URL
 
-LOGIN_REDIRECT_URL = '/user/profile/'
+LOGIN_REDIRECT_URL = '/user/home/'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

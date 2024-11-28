@@ -23,6 +23,8 @@ from admin_panel.admin import custom_admin_site  # Import your custom admin site
 from user_management.views import login
 
 
+
+
 urlpatterns = [
     path('', login, name='login'),
     path('admin/', custom_admin_site.urls),  # Use the custom admin site
@@ -39,6 +41,8 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
     path('user/', include('user_management.urls')),
+
+  
 
 
 
