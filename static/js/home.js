@@ -85,9 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const map = L.map('map').setView([39.9208, 32.8541], 6); // Default location: Ankara
-
-    // Add OpenStreetMap tiles
+    const map = L.map('map').setView([39.9208, 32.8541], 6); // Default location: Ankara// Add OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
     }).addTo(map);
@@ -132,4 +130,3 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 });
-
