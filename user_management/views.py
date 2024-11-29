@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.http import QueryDict
 
 def register(request):
     if request.method == 'POST':
@@ -17,12 +18,18 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')  # Adjust the redirect as needed
-        else:
-            print("Form errors:", form.errors)  # For debugging
+            return redirect('home')
     else:
-        form = CustomUserCreationForm()
+        # Get initial data from query parameters
+        initial_data = QueryDict(request.META['QUERY_STRING'])
+        form = CustomUserCreationForm(initial={
+            'username': initial_data.get('username', ''),
+            'email': initial_data.get('email', ''),
+            'password1': initial_data.get('password', ''),
+            'password2': initial_data.get('password', ''),
+        })
     return render(request, 'user_management/register.html', {'form': form})
+
 @login_required
 def profile_update(request):
     if request.method == 'POST':

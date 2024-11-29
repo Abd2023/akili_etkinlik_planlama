@@ -12,10 +12,10 @@
         <h1 style="text-align: center;">Create an Account</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="username" placeholder="Username" required value="{{ request.GET.username|default:'' }}">
             <input type="text" name="first_name" placeholder="First Name" required>
             <input type="text" name="last_name" placeholder="Last Name" required>
-            <input type="email" name="email" placeholder="Email" required>
+            <input type="email" name="email" placeholder="Email" required value="{{ request.GET.email|default:'' }}">
             <input type="password" name="password1" placeholder="Password" required>
             <input type="password" name="password2" placeholder="Confirm Password" required>
             <input type="date" name="date_of_birth" placeholder="Date of Birth">
@@ -30,7 +30,6 @@
             <textarea name="interests" placeholder="Interests"></textarea>
             <input type="file" name="profile_picture">
             <button type="submit">Register</button>
-        
             {% if form.errors %}
                 <ul>
                     {% for field, errors in form.errors.items %}
@@ -39,8 +38,6 @@
                 </ul>
             {% endif %}
         </form>
-        
-        
         <p style="text-align: center;">Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
     </div>
     <script src="{% static 'js/register.js' %}"></script>
