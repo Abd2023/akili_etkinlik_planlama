@@ -1,136 +1,159 @@
-/* Arka plan animasyonu */
+/* Genel Ayarlar */
 body {
+    margin: 0;
     font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
+    background: linear-gradient(to right, #f6d365, #fda085);
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
-}
-
-/* Arka plan için gradient animasyon */
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-header {
-    background: rgba(255, 255, 255, 0.9);
+    background-color: #ff7043;
     padding: 15px 20px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-    margin: 0;
-    color: #333;
-}
-
-.logout-button {
-    text-decoration: none;
-    padding: 10px 15px;
-    background: #ff4b2b;
     color: white;
-    border-radius: 20px;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
-
-.logout-button:hover {
-    background: #ff7f50;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 100px; /* Header boşluğu için */
-    width: 90%;
-    max-width: 1200px;
-}
-
-.left-panel, .right-panel {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.8);
-    margin: 10px;
-    border-radius: 10px;
-    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.left-panel:hover, .right-panel:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+.navbar h1 {
+    margin: 0;
+    font-size: 1.5rem;
 }
 
-h2 {
-    color: #333;
-    border-bottom: 2px solid #ff4b2b;
-    display: inline-block;
-    padding-bottom: 5px;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    background: #fff;
-    margin: 10px 0;
-    padding: 10px 15px;
+.navbar .nav-actions a {
+    background: white;
+    color: #ff7043;
+    padding: 8px 15px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-li:hover {
-    transform: translateX(10px);
-}
-
-.details-button, .join-button, .message-button {
-    margin: 5px 0;
+    font-weight: bold;
     text-decoration: none;
+    margin-left: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar .nav-actions a:hover {
+    background: #ff5722;
+    color: white;
+}
+
+/* View All Events Button */
+.all-events-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.all-events-button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.all-events-button:hover {
+    background: #388e3c;
+    transform: scale(1.1);
+}
+
+/* Section */
+.section {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #ff7043;
+    margin-bottom: 20px;
+}
+
+/* Events Grid */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Event Card */
+.event-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ff7043;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+    border-color: #ff5722;
+}
+
+.event-card h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #ff7043;
+}
+
+.event-card p {
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Event Actions */
+.event-actions {
+    margin-top: 15px;
+}
+
+.event-actions a {
+    display: inline-block;
+    margin: 5px;
     padding: 8px 12px;
     border-radius: 5px;
-    display: inline-block;
-    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 
 .details-button {
-    background: #007bff;
+    background: #2196f3;
+    color: white;
 }
 
 .details-button:hover {
-    background: #0056b3;
+    background: #1976d2;
+    transform: scale(1.05);
 }
 
 .join-button {
-    background: #28a745;
+    background: #4caf50;
+    color: white;
 }
 
 .join-button:hover {
-    background: #218838;
+    background: #388e3c;
+    transform: scale(1.05);
 }
 
-.message-button {
-    background: #ffc107;
-    color: black;
+.leave-button {
+    background: #f44336;
+    color: white;
 }
 
-.message-button:hover {
-    background: #e0a800;
+.leave-button:hover {
+    background: #d32f2f;
+    transform: scale(1.05);
 }

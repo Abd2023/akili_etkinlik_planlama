@@ -15,33 +15,38 @@ import requests
 from django.http import JsonResponse
 
 
-
+def home_view(request):
+    return render(request, 'home.html')
 
 
 @login_required
 def home(request):
     user = request.user
 
-    # Step 1: Get user's interests
+    # Kullanıcının katıldığı etkinlikler
+    user_participated_event_ids = Participant.objects.filter(user=user).values_list('event_id', flat=True)
+
+    # Önerilen etkinlikler
     user_interests = user.interests.split(", ") if user.interests else []
+    recommended_events = Event.objects.filter(category__in=user_interests).exclude(id__in=user_participated_event_ids)
 
-    # Step 2: Get past participation categories
-    participated_events = Participant.objects.filter(user=user).select_related('event')
-    participated_categories = {event.event.category for event in participated_events}
+    # Genel etkinlikler (önerilen ve katıldığı etkinlikler hariç)
+    general_events = Event.objects.exclude(id__in=recommended_events.values_list('id', flat=True)).exclude(id__in=user_participated_event_ids)
 
-    # Step 3: Recommend events based on interests and exclude already joined events
-    recommended_events = Event.objects.filter(
-        category__in=user_interests
-    ).exclude(id__in=participated_events.values_list('event_id', flat=True))
+    # Kullanıcının katıldığı etkinlikler
+    user_events = Event.objects.filter(id__in=user_participated_event_ids)
 
-    # Step 4: Prioritize events matching frequent categories
-    recommended_events = sorted(
-        recommended_events,
-        key=lambda event: event.category in participated_categories,
-        reverse=True
-    )
+    # Şablona veriler gönderiliyor
+    context = {
+        'user': user,
+        'recommended_events': recommended_events,
+        'general_events': general_events,
+        'user_events': user_events,
+        'user_participated_event_ids': list(user_participated_event_ids),
+    }
+    return render(request, 'home.html', context)
 
-    return render(request, 'home.html', {'recommended_events': recommended_events})
+
 
 
 
@@ -108,24 +113,19 @@ def join_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     participant, created = Participant.objects.get_or_create(user=request.user, event=event)
 
-    if created:  # Only award points for first-time participation
-        request.user.total_points += 10  # Add points for participation
-        if not request.user.first_participation_bonus_awarded:  # First participation bonus
-            request.user.total_points += 20
-            request.user.first_participation_bonus_awarded = True
+    if created:  # Eğer kullanıcı daha önce katılmamışsa
+        request.user.total_points += 10  # Katılım puanı ekle
         request.user.save()
 
-    return redirect('event_list')
+    return redirect('/home/')
 
 
 @login_required
 def leave_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     Participant.objects.filter(user=request.user, event=event).delete()
-    return redirect('event_list')
+    return redirect('/home/')
 
-
-# Event detail view
 def event_detail(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     return render(request, 'event_management/event_detail.html', {'event': event})

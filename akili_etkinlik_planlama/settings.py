@@ -42,13 +42,14 @@ INSTALLED_APPS = [
     'chat',
     'recommendation',
     'admin_panel',
+    
 ]
 
 AUTH_USER_MODEL = 'user_management.CustomUser'
 
 LOGIN_URL = '/login/'  # Update this to your login page URL
 
-LOGIN_REDIRECT_URL = '/user/home/'
+LOGIN_REDIRECT_URL = '/home/'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -72,7 +73,7 @@ ROOT_URLCONF = 'akili_etkinlik_planlama.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
