@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, ProfileUpdateForm
 from user_management.decorators import admin_required
-
+from django.http import JsonResponse
 
 
 
@@ -17,11 +17,12 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            return redirect('home')  # Adjust the redirect as needed
+        else:
+            print("Form errors:", form.errors)  # For debugging
     else:
         form = CustomUserCreationForm()
     return render(request, 'user_management/register.html', {'form': form})
-
 @login_required
 def profile_update(request):
     if request.method == 'POST':
