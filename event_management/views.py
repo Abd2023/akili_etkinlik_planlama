@@ -107,7 +107,6 @@ def event_list(request):
     })
 
 
-
 @login_required
 def join_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)

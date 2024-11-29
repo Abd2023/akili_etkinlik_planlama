@@ -1,0 +1,131 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styles */
+.navbar {
+    background: #ff7043;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: #333;
+    transition: background 0.3s;
+}
+
+.navbar a:hover {
+    background: #555;
+}
+
+/* Event Container Styles */
+.event-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    margin: 20px;
+}
+
+/* Event Card Styles */
+.event-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s;
+    position: relative; /* Ensures child elements are properly contained */
+    overflow: hidden; /* Avoids hidden overflow issues */
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Action Buttons Container */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    gap: 10px; /* Adds spacing between buttons */
+    flex-wrap: wrap; /* Ensures buttons wrap if they don't fit in one row */
+}
+
+/* General Button Styles */
+.action-buttons a {
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: white;
+    display: inline-block;
+    pointer-events: auto; /* Ensures buttons can be clicked */
+    z-index: 10; /* Ensures buttons are on top */
+}
+
+/* Specific Button Styles */
+.details-button {
+    background-color: #007bff; /* Blue */
+}
+
+.details-button:hover {
+    background-color: #0056b3;
+}
+
+.join-button {
+    background-color: #28a745; /* Green */
+}
+
+.join-button:hover {
+    background-color: #1e7e34;
+}
+
+.leave-button {
+    background-color: #dc3545; /* Red */
+}
+
+.leave-button:hover {
+    background-color: #b02a37;
+}
+
+.edit-button {
+    background-color: #ffc107; /* Yellow */
+    color: black; /* Ensures readability */
+}
+
+.edit-button:hover {
+    background-color: #e0a800;
+}
+
+.chat-button {
+    background-color: #17a2b8; /* Teal */
+}
+
+.chat-button:hover {
+    background-color: #117a8b;
+}
+
+/* Ensure Buttons Are Consistently Sized */
+.action-buttons a {
+    min-width: 100px; /* Ensures all buttons have the same minimum width */
+    text-align: center;
+}

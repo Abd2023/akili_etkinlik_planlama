@@ -17,4 +17,5 @@ urlpatterns = [
     #path('map/', views.map_view, name='map_view'), 
     path('map/', views.event_map, name='event_map'),
     path('<int:event_id>/join/', views.join_event, name='join_event'),
+     path('events/', views.event_list, name='event_list'),  # Event list
 ]

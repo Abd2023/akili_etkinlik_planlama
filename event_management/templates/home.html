@@ -15,6 +15,7 @@
             <a href="{% url 'profile' %}" class="profile-button">Profile</a>
             <a href="{% url 'event_create' %}" class="create-event-button">Create Event</a>
             <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+            
         </div>
     </div>
 
@@ -55,6 +56,7 @@
                 <div class="event-actions">
                     <a href="{% url 'event_detail' event.id %}" class="details-button">Details</a>
                     <a href="{% url 'leave_event' event.id %}" class="leave-button">Leave</a>
+                    <a href="{% url 'chat:messaging_panel' event.id %}" class="chat-button">Join Chat</a>
                 </div>
             </div>
             {% empty %}

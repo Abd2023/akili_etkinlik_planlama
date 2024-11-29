@@ -157,3 +157,10 @@ body {
     background: #d32f2f;
     transform: scale(1.05);
 }
+.chat-button {
+    background-color: #17a2b8; /* Teal */
+}
+
+.chat-button:hover {
+    background-color: #117a8b;
+}
