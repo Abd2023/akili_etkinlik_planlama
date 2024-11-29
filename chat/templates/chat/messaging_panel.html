@@ -1,56 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Chat</title>
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
 </head>
 <body>
-    <h1>Event Chat</h1>
+    <div class="chat-container">
+        <header>
+            <h1>Chat for {{ event.name }}</h1>
+        </header>
 
-    <div>
-        <h2>Chat for {{ event.name }}</h2>
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>
-                        <strong>{{ message.sender.username }}</strong>: {{ message.content }}
-                        <br><small>{{ message.timestamp }}</small>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No messages yet.</p>
-        {% endif %}
+        <main id="messageHistory">
+            {% for message in messages %}
+                <div class="message animate">
+                    <strong class="sender">{{ message.sender.username }}</strong>
+                    <div class="content">{{ message.content }}</div>
+                    <span class="timestamp">{{ message.timestamp|date:"Y-m-d H:i" }}</span>
+                </div>
+            {% empty %}
+                <p class="no-messages">No messages yet. Start the conversation!</p>
+            {% endfor %}
+        </main>
+
+        <footer>
+            <form id="messageForm" method="POST">
+                {% csrf_token %}
+                <textarea name="content" id="content" placeholder="Write your message..." required></textarea>
+                <button type="submit" class="send-button">Send</button>
+            </form>
+        </footer>
     </div>
-    
-
-    <!-- Message History Section -->
-    <div id="messageHistory" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto;">
-        {% for message in messages %}
-            <div>
-                <strong>{{ message.sender.username }}:</strong> {{ message.content }}
-                <span style="font-size: 0.8em; color: gray;">({{ message.timestamp|date:"Y-m-d H:i" }})</span>
-            </div>
-        {% empty %}
-            <p>No messages yet. Start the conversation!</p>
-        {% endfor %}
-    </div>
-
-    <!-- New Message Form -->
-    <form id="messageForm" method="POST">
-        {% csrf_token %}
-        <textarea name="content" id="content" rows="3" placeholder="Write a message..." required></textarea><br>
-        <button type="submit">Send</button>
-    </form>
 
     <script>
-        // Handle form submission via AJAX
-        document.getElementById("messageForm").addEventListener("submit", async (event) => {
-            event.preventDefault();
+        const messageForm = document.getElementById("messageForm");
 
-            const content = document.getElementById("content").value;
-            if (!content.trim()) {
+        messageForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const contentField = document.getElementById("content");
+            const content = contentField.value.trim();
+
+            if (!content) {
                 alert("Message cannot be empty.");
                 return;
             }
@@ -68,17 +60,11 @@
             });
 
             if (response.ok) {
-                const message = await response.json();
-                const messageHistory = document.getElementById("messageHistory");
-                const newMessage = `
-                    <div>
-                        <strong>${message.sender}:</strong> ${message.content}
-                        <span style="font-size: 0.8em; color: gray;">(${message.timestamp})</span>
-                    </div>
-                `;
-                messageHistory.innerHTML += newMessage;
-                document.getElementById("content").value = ""; // Clear the form
-                messageHistory.scrollTop = messageHistory.scrollHeight; // Scroll to the bottom
+                // Yenilemeden önce bir animasyon tetikleyebilirsiniz.
+                document.body.classList.add("fade-out");
+                setTimeout(() => {
+                    window.location.reload(); // Sayfayı yenile
+                }, 300); // Animasyon süresini bekle
             } else {
                 alert("Error sending message. Please try again.");
             }
