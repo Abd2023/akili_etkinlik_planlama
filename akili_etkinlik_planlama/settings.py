@@ -86,7 +86,23 @@ TEMPLATES = [
     },
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'  # For Gmail
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False  # Ensure this is False, as you're using TLS
+EMAIL_HOST_USER = 'testsifreunuttum@gmail.com'
+EMAIL_HOST_PASSWORD = 'xirn fvkl vcic yujt'  # Your email password
+
+DEFAULT_FROM_EMAIL = 'Your App <noreply@yourdomain.com>'
+
+
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+
 
 WSGI_APPLICATION = 'akili_etkinlik_planlama.wsgi.application'
 
