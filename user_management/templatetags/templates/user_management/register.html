@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Create an Account</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password1" placeholder="Password" required>
+            <input type="password" name="password2" placeholder="Confirm Password" required>
+            <input type="date" name="date_of_birth" placeholder="Date of Birth">
+            <select name="gender">
+                <option value="" disabled selected>Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="tel" name="phone_number" placeholder="Phone Number">
+            <input type="text" name="location" placeholder="Location">
+            <textarea name="interests" placeholder="Interests"></textarea>
+            <input type="file" name="profile_picture">
+            <button type="submit">Register</button>
+        
+            {% if form.errors %}
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        <li>{{ field }}: {{ errors|join:", " }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </form>
+        
+        
+        <p style="text-align: center;">Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+    </div>
+    <script src="{% static 'js/register.js' %}"></script>
+</body>
+</html>

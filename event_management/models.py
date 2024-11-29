@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
+
 class Event(models.Model):
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=50)
@@ -47,6 +48,8 @@ class Participant(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="participants")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     joined_at = models.DateTimeField(auto_now_add=True)
+
+   
 
     def __str__(self):
         return f"{self.user.username} - {self.event.name}"
