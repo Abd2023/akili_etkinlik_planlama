@@ -21,7 +21,8 @@ from event_management.views import home  # Import the home view
 from event_management.admin_views import admin_report  # Import your view
 from admin_panel.admin import custom_admin_site  # Import your custom admin site  # Import the custom admin site
 from user_management.views import login
-
+from django.conf import settings
+from django.conf.urls.static import static  # Import static settings
 
 
 
@@ -42,3 +43,9 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
 
 ]
+
+
+
+# Serve media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
