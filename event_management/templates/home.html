@@ -14,7 +14,13 @@
         <div class="nav-actions">
             <a href="{% url 'profile' %}" class="profile-button">Profile</a>
             <a href="{% url 'event_create' %}" class="create-event-button">Create Event</a>
-            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+
+            <!-- Modified Logout Button -->
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
+
             <a href="{% url 'event_map' %}" class="map-button">Event Map</a>
         </div>
     </div>
