@@ -164,3 +164,18 @@ body {
 .chat-button:hover {
     background-color: #117a8b;
 }
+
+
+.nav-actions a.map-button {
+    background-color: #4caf50; /* Green background for distinction */
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.nav-actions a.map-button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
