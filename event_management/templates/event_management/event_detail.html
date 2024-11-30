@@ -1,10 +1,29 @@
-<!-- event_management/event_detail.html -->
-<h1>{{ event.name }}</h1>
-<p><strong>Description:</strong> {{ event.description }}</p>
-<p><strong>Location:</strong> {{ event.location }}</p>
-<p><strong>Date:</strong> {{ event.date }}</p>
-<p><strong>Time:</strong> {{ event.start_time }} to {{ event.end_time }}</p>
-<a href="{% url 'event_edit' event.id %}">Edit Event</a>
-<a href="{% url 'event_list' %}">Back to Event List</a>
-<a href="{% url 'chat:messaging_panel' event.id %}">Join Chat</a>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="{% static 'css/event_detail.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="event-header">
+            <h1>{{ event.name }}</h1>
+        </div>
+        <div class="event-details">
+            <p><strong>Description:</strong> {{ event.description }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p><strong>Date:</strong> {{ event.date }}</p>
+            <p><strong>Time:</strong> {{ event.start_time }} to {{ event.end_time }}</p>
+        </div>
+        <div class="buttons">
+            <button onclick="window.location.href='{% url 'event_edit' event.id %}'" class="edit-btn">Edit Event</button>
+            <button onclick="window.location.href='{% url 'event_list' %}'" class="back-btn">Back to Event List</button>
+            <button onclick="window.location.href='{% url 'chat:messaging_panel' event.id %}'" class="chat-btn">Join Chat</button>
+        </div>
+    </div>
+    <script src="{% static 'js/event_detail.js' %}"></script>
+</body>
+</html>
