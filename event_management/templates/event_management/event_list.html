@@ -10,13 +10,13 @@
 <body>
     {% if user.is_authenticated %}
         <div class="navbar">
-            <h1>Welcome, {{ user.username }}</h1>
+            <h1>Hoş geldin, {{ user.username }}</h1>
             <a href="{% url 'logout' %}" class="logout-button">Logout</a>
-            <a href="{% url 'event_create' %}" class="create-event-button">Create a New Event</a>
-            <a href="{% url 'home' %}" class="back-button">Back to Home</a>
+            <a href="{% url 'event_create' %}" class="create-event-button">Yeni Bir Etkinlik Oluştur</a>
+            <a href="{% url 'home' %}" class="back-button">Ana Sayfaya Dön</a>
         </div>
     {% else %}
-        <p>You need to <a href="{% url 'login' %}">login</a> to access this page.</p>
+        <p>Yapmanız gerekenler <a href="{% url 'login' %}">Oturum açma</a> Bu sayfaya erişmek için.</p>
     {% endif %}
 
     <div class="event-container">
@@ -24,25 +24,25 @@
             {% for event, is_participant, unread_count in events_with_participation %}
             <div class="event-card">
                 <h3>{{ event.name }}</h3>
-                <p><strong>Date:</strong> {{ event.date }}</p>
-                <p><strong>Location:</strong> {{ event.location }}</p>
-                <p><strong>Time:</strong> {{ event.start_time }} - {{ event.end_time }}</p>
+                <p><strong>Tarih:</strong> {{ event.date }}</p>
+                <p><strong>Konum:</strong> {{ event.location }}</p>
+                <p><strong>Zaman:</strong> {{ event.start_time }} - {{ event.end_time }}</p>
                 {% if unread_count > 0 %}
                     <p style="color: red;">Unread Messages: {{ unread_count }}</p>
                 {% endif %}
                 <div class="action-buttons">
-                    <a href="{% url 'event_detail' event.id %}" class="details-button">Details</a>
+                    <a href="{% url 'event_detail' event.id %}" class="details-button">Detaylar</a>
                     {% if is_participant %}
-                    <a href="{% url 'leave_event' event.id %}" class="leave-button">Leave Event</a>
+                    <a href="{% url 'leave_event' event.id %}" class="leave-button">Etkinlikten Ayrıl</a>
                     {% else %}
-                    <a href="{% url 'join_event' event.id %}" class="join-button">Join Event</a>
+                    <a href="{% url 'join_event' event.id %}" class="join-button">Etkinliğe katıl</a>
                     {% endif %}
-                    <a href="{% url 'event_edit' event.id %}" class="edit-button">Edit</a>
-                    <a href="{% url 'chat:messaging_panel' event.id %}" class="chat-button">Join Chat</a>
+                    <a href="{% url 'event_edit' event.id %}" class="edit-button">Düzenlemek</a>
+                    <a href="{% url 'chat:messaging_panel' event.id %}" class="chat-button">Sohbete Katıl</a>
                 </div>
             </div>
             {% empty %}
-            <p>No events available at the moment.</p>
+            <p>Şu anda mevcut etkinlik yok.</p>
             {% endfor %}
         {% endif %}
     </div>

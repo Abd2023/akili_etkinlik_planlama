@@ -11,30 +11,30 @@
 </head>
 <body>
     <div class="profile-container">
-        <h1>Welcome, {{ user.first_name }}!</h1>
+        <h1>Hoş geldin, {{ user.first_name }}!</h1>
         <div class="profile-details">
             <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
-            <p><strong>Username:</strong> {{ user.username }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>First Name:</strong> {{ user.first_name }}</p>
-            <p><strong>Last Name:</strong> {{ user.last_name }}</p>
-            <p><strong>Date of Birth:</strong> {{ user.date_of_birth|date:"F j, Y" }}</p>
-            <p><strong>Gender:</strong> {{ user.gender }}</p>
-            <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
-            <p><strong>Location:</strong> {{ user.location }}</p>
-            <p><strong>Interests:</strong> {{ user.interests }}</p>
-            <p class="total-points"><strong>Total Points:</strong> {{ user.total_points }}</p>
-            <button onclick="window.location.href='{% url 'profile_update' %}'" class="edit-button">Edit Profile</button>
+            <p><strong>Kullanıcı adı:</strong> {{ user.username }}</p>
+            <p><strong>E-posta:</strong> {{ user.email }}</p>
+            <p><strong>Ad:</strong> {{ user.first_name }}</p>
+            <p><strong>Soyad:</strong> {{ user.last_name }}</p>
+            <p><strong>Doğum Tarihi:</strong> {{ user.date_of_birth|date:"F j, Y" }}</p>
+            <p><strong>Cinsiyet:</strong> {{ user.gender }}</p>
+            <p><strong>Telefon Numarası:</strong> {{ user.phone_number }}</p>
+            <p><strong>Konum:</strong> {{ user.location }}</p>
+            <p><strong>ilgi Alanı:</strong> {{ user.interests }}</p>
+            <p class="total-points"><strong>toplam puan:</strong> {{ user.total_points }}</p>
+            <button onclick="window.location.href='{% url 'profile_update' %}'" class="edit-button">Profili Düzenle</button>
         </div>
 
         <div class="achievements-container">
-            <h3>Your Achievements</h3>
+            <h3>Kazandıklarınız</h3>
             <ul>
                 {% if user.first_participation_bonus_awarded %}
-                    <li>First Participation Bonus: 20 points</li>
+                    <li>İlk Katılım Bonusu: 20 puan</li>
                 {% endif %}
-                <li>Events Joined: {{ user.participations.count }} ({{ user.participations.count|multiply:10 }} points)</li>
-                <li>Events Created: {{ user.created_events.count }} ({{ user.created_events.count|multiply:15 }} points)</li>
+                <li>Katıldığı Etkinlikler: {{ user.participations.count }} ({{ user.participations.count|multiply:10 }} points)</li>
+                <li>Oluşturulan Etkinlikler: {{ user.created_events.count }} ({{ user.created_events.count|multiply:15 }} points)</li>
             </ul>
         </div>
     </div>

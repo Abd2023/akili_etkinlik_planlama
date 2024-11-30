@@ -1,0 +1,18 @@
+{% load static %}  <!-- Add this line at the top -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our Platform</title>
+    <link rel="stylesheet" href="{% static 'css/welcome.css' %}">
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>Platformumuza Hoş Geldiniz</h1>
+        <p>Yolculuğunuz burada başlıyor! Hesabınıza erişmek için lütfen giriş yapın.</p>
+        <a href="{% url 'login' %}" class="login-button">Oturum açma</a>
+    </div>
+</body>
+</html>

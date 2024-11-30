@@ -3,17 +3,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <title>Yönetici Kontrol Paneli</title>
 </head>
 <body>
-    <h1>Welcome to the Admin Dashboard</h1>
-    <p>Total Users: {{ total_users }}</p>
-    <p>Total Events: {{ total_events }}</p>
-    <p>Active Events: {{ active_events }}</p>
-
-    <a href="{% url 'admin_manage_users' %}">Manage Users</a> |
-    <a href="{% url 'admin_manage_events' %}">Manage Events</a>
-    <a href="{% url 'admin_report' %}">Manage Events</a>
+    <h1>Yönetici Kontrol Paneline Hoş Geldiniz</h1>
+    <p>Bu sayfaya yalnızca süper kullanıcılar erişebilir.</p>
+    <!-- Add more admin functionalities here -->
 </body>
 </html>

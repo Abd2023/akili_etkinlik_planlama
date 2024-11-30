@@ -23,16 +23,17 @@ from admin_panel.admin import custom_admin_site  # Import your custom admin site
 from user_management.views import login
 from django.conf import settings
 from django.conf.urls.static import static  # Import static settings
-
+from django.views.generic import TemplateView  # Import TemplateView
+from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    path('', login, name='login'),
+    path('', TemplateView.as_view(template_name='welcome.html'), name='welcome'),
     path('admin/', include('admin_panel.urls')),
     #path('admin/', custom_admin_site.urls),  # Use the custom admin site
     path('user/', include('user_management.urls')),  # This includes user_management URLs
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),  # Use Django's default login template
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', LogoutView.as_view(next_page='login', http_method_names=['get', 'post']), name='logout'),
     path('events/', include('event_management.urls')),  # Include event_management URLs under /events/
     path('home/', home, name='home'),  # Add the home view
     path('events/', include('event_management.urls')),

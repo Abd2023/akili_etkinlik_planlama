@@ -3,19 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Event Management Platform{% endblock %}</title>
+    <title>{% block title %}Etkinlik Yönetim Platformu{% endblock %}</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/map.css' %}"> <!-- Include your custom CSS -->
 </head>
 <body>
     <header>
-        <h1>Welcome to Event Management Platform</h1>
+        <h1>Etkinlik Yönetim Platformuna Hoş Geldiniz</h1>
+        <nav>
+            <a href="{% url 'home' %}">Ana Ekran</a>
+            <a href="{% url 'event_list' %}">Tüm Etkinlikler</a>
+            <a href="{% url 'profile' %}">Profil</a>
+
+            <!-- Modified Logout Button -->
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Oturum Kapatma</button>
+            </form>
+        </nav>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
     <footer>
-        <p>&copy; 2024 Event Management Platform</p>
+        <p>&copy; 2024 Etkinlik Yönetim Platformu</p>
     </footer>
 </body>
 </html>
