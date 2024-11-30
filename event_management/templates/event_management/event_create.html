@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Event</title>
+    <link rel="stylesheet" href="{% static 'css/event_create.css' %}">
 </head>
 <body>
-    <h1>Create a New Event</h1>
-    
-    <form method="post">
-        {% csrf_token %}
-        
-        <!-- Display Non-Field Errors (e.g., Time Conflicts) -->
-        {% if form.non_field_errors %}
-            <ul class="errorlist">
-                {% for error in form.non_field_errors %}
-                    <li style="color: red;">{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        
-        {{ form.as_p }}
-        <button type="submit">Create Event</button>
-    </form>
-    
-    <p><a href="{% url 'event_list' %}">Back to Event List</a></p>
+    <div class="container">
+        <h1>Create a New Event</h1>
+        <form id="eventCreateForm" method="post">
+            {% csrf_token %}
+
+            <!-- Display Non-Field Errors (e.g., Time Conflicts) -->
+            {% if form.non_field_errors %}
+                <ul class="errorlist">
+                    {% for error in form.non_field_errors %}
+                        <li class="error">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">Create Event</button>
+        </form>
+
+        <p><a href="{% url 'event_list' %}" class="back-link">Back to Event List</a></p>
+    </div>
+
+    <script src="{% static 'js/event_create.js' %}"></script>
 </body>
 </html>
