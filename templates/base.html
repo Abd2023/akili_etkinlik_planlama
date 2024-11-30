@@ -6,6 +6,8 @@
     <title>{% block title %}Event Management Platform{% endblock %}</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/map.css' %}"> <!-- Include your custom CSS -->
 </head>
 <body>
     <header>
