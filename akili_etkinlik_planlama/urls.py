@@ -31,7 +31,7 @@ urlpatterns = [
     path('admin/', custom_admin_site.urls),  # Use the custom admin site
     path('user/', include('user_management.urls')),  # This includes user_management URLs
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),  # Use Django's default login template
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),  # Add logout URL
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('events/', include('event_management.urls')),  # Include event_management URLs under /events/
     path('home/', home, name='home'),  # Add the home view
     path('events/', include('event_management.urls')),

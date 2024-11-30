@@ -15,6 +15,7 @@ import requests
 from django.http import JsonResponse
 
 
+@login_required
 def home_view(request):
     return render(request, 'home.html')
 
@@ -88,6 +89,8 @@ def event_create(request):
 def get_unread_message_count(user, event):
     return event.messages.exclude(read_by=user).count()
 
+
+@login_required
 def event_list(request):
     events = Event.objects.all()
     events_with_participation = []
@@ -142,13 +145,8 @@ def event_edit(request, event_id):
     return render(request, 'event_management/event_edit.html', {'form': form, 'event': event})
 
 
-def map_view(request):
-    events = Event.objects.exclude(latitude=0.0, longitude=0.0).values("name", "latitude", "longitude", "location", "date", "start_time", "description")
-    events_json = json.dumps(list(events), cls=DjangoJSONEncoder)  # Ensure this is JSON serializable
-    return render(request, 'event_management/map_view.html', {
-    'events': events_json,
-    'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY
-})
+
+
 
 
 
@@ -173,7 +171,7 @@ def get_route(request):
         return JsonResponse({"error": "Unable to fetch route"}, status=500)
 
 
-
+@login_required
 def event_map(request):
     events = Event.objects.values('name', 'latitude', 'longitude', 'location', 'date', 'start_time', 'description')
     

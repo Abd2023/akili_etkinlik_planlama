@@ -51,6 +51,10 @@ LOGIN_URL = '/login/'  # Update this to your login page URL
 
 LOGIN_REDIRECT_URL = '/home/'
 
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect after successful logout
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Sessions expire when the browser is closed
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -66,7 +70,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    
 ]
+
+CACHE_MIDDLEWARE_SECONDS = 0
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
 
 ROOT_URLCONF = 'akili_etkinlik_planlama.urls'
 
@@ -183,3 +194,5 @@ GOOGLE_MAPS_API_KEY = "AlzaSy-tHO5caZi4LhDsnwUJUOGvOda7MwWdUPi"
 
 
 
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Default session backend
+CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'  # Local memory cache
