@@ -1,22 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Report</title>
+    <link rel="stylesheet" href="{% static 'css/admin_report.css' %}">
 </head>
 <body>
-    <h1>Admin Report</h1>
-    <p><strong>Total Users:</strong> {{ total_users }}</p>
-    <p><strong>Total Events:</strong> {{ total_events }}</p>
-    <p><strong>Active Events:</strong> {{ active_events }}</p>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <div class="stats">
+            <div class="stat-card">
+                <h2>Total Users</h2>
+                <p>{{ total_users }}</p>
+            </div>
+            <div class="stat-card">
+                <h2>Total Events</h2>
+                <p>{{ total_events }}</p>
+            </div>
+            <div class="stat-card">
+                <h2>Active Events</h2>
+                <p>{{ active_events }}</p>
+            </div>
+        </div>
 
-    <h2>Top 10 Users by Points</h2>
-    <ul>
-        {% for user in top_users_by_points %}
-            <li>{{ user.username }}: {{ user.total_points }} points</li>
-        {% empty %}
-            <li>No users available.</li>
-        {% endfor %}
-    </ul>
+        <h2>Top 10 Users by Points</h2>
+        <ul class="user-list">
+            {% for user in top_users_by_points %}
+                <li>
+                    <span>{{ user.username }}</span>
+                    <span>{{ user.total_points }} points</span>
+                </li>
+            {% empty %}
+                <li>No users available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script src="{% static 'js/admin_report.js' %}"></script>
 </body>
 </html>
