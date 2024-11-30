@@ -10,7 +10,12 @@
 <body>
     <div class="container">
         <h1>Edit Event: {{ event.name }}</h1>
-        <form method="post" id="editEventForm">
+        {% if event.image %}
+            <img src="{{ event.image.url }}" alt="{{ event.name }}" class="event-image">
+        {% else %}
+            <div class="placeholder-image">No Image Available</div>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data" id="editEventForm">
             {% csrf_token %}
             
             <!-- Display Errors -->

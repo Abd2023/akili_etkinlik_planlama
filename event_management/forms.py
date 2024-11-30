@@ -6,7 +6,7 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = [
             'name', 'description', 'location', 'category', 
-            'date', 'start_time', 'end_time', 'latitude', 'longitude'
+            'date', 'start_time', 'end_time', 'latitude', 'longitude', 'image'
         ]
         widgets = {
             'date': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date', 'placeholder': 'YYYY-MM-DD'}),

@@ -11,6 +11,11 @@
     <div class="container">
         <div class="event-header">
             <h1>{{ event.name }}</h1>
+            {% if event.image %}
+                <img src="{{ event.image.url }}" alt="{{ event.name }}" class="event-image">
+            {% else %}
+                <div class="placeholder-image">No Image Available</div>
+            {% endif %}
         </div>
         <div class="event-details">
             <p><strong>Description:</strong> {{ event.description }}</p>

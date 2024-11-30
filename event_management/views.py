@@ -68,26 +68,21 @@ def check_time_conflicts(new_event):
 @login_required
 def event_create(request):
     if request.method == 'POST':
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, request.FILES)  # Include request.FILES
         if form.is_valid():
             event = form.save(commit=False)
             event.created_by = request.user
-
-            # Check for time conflicts
             if check_time_conflicts(event):
                 form.add_error(None, "This event conflicts with an existing event.")
             else:
                 event.save()
-
-                # Award points for event creation
                 request.user.total_points += 15
                 request.user.save()
-
                 return redirect('event_list')
     else:
         form = EventForm()
-
     return render(request, 'event_management/event_create.html', {'form': form})
+
 
 
 def get_unread_message_count(user, event):
@@ -134,11 +129,9 @@ def event_detail(request, event_id):
 def event_edit(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     if request.method == 'POST':
-        form = EventForm(request.POST, instance=event)
+        form = EventForm(request.POST, request.FILES, instance=event)  # Include request.FILES
         if form.is_valid():
             updated_event = form.save(commit=False)
-
-            # Check for time conflicts
             if check_time_conflicts(updated_event):
                 form.add_error(None, "This event conflicts with an existing event.")
             else:
