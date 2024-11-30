@@ -196,3 +196,5 @@ GOOGLE_MAPS_API_KEY = "AlzaSy-tHO5caZi4LhDsnwUJUOGvOda7MwWdUPi"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Default session backend
 CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'  # Local memory cache
+
+

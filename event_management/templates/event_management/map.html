@@ -6,16 +6,16 @@
 {% block content %}
 <div class="loading-spinner" style="display:none;"></div>
 
-<h1 class="page-title">Event Map with Route Planning</h1>
+<h1 class="page-title">Rota Planlama ile Etkinlik Haritası</h1>
 
 <form id="routeForm" class="form">
-    <label for="mode">Transportation Mode:</label>
+    <label for="mode">Taşıma Modu:</label>
     <select id="mode" class="dropdown">
-        <option value="DRIVING">Driving</option>
-        <option value="WALKING">Walking</option>
-        <option value="BICYCLING">Cycling</option>
+        <option value="DRIVING">Sürme</option>
+        <option value="WALKING">Yürüyüş</option>
+        <option value="BICYCLING">Bisiklet</option>
     </select>
-    <button type="button" id="findRoute" class="find-route-button">Find Route</button>
+    <button type="button" id="findRoute" class="find-route-button">Rota bul</button>
 </form>
 
 <div id="map" style="height: 500px; width: 100%;"></div>

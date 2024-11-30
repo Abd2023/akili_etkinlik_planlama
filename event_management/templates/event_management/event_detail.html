@@ -18,15 +18,15 @@
             {% endif %}
         </div>
         <div class="event-details">
-            <p><strong>Description:</strong> {{ event.description }}</p>
-            <p><strong>Location:</strong> {{ event.location }}</p>
-            <p><strong>Date:</strong> {{ event.date }}</p>
-            <p><strong>Time:</strong> {{ event.start_time }} to {{ event.end_time }}</p>
+            <p><strong>Açıklama:</strong> {{ event.description }}</p>
+            <p><strong>Konum:</strong> {{ event.location }}</p>
+            <p><strong>Tarih:</strong> {{ event.date }}</p>
+            <p><strong>Zaman:</strong> {{ event.start_time }} to {{ event.end_time }}</p>
         </div>
         <div class="buttons">
-            <button onclick="window.location.href='{% url 'event_edit' event.id %}'" class="edit-btn">Edit Event</button>
-            <button onclick="window.location.href='{% url 'event_list' %}'" class="back-btn">Back to Event List</button>
-            <button onclick="window.location.href='{% url 'chat:messaging_panel' event.id %}'" class="chat-btn">Join Chat</button>
+            <button onclick="window.location.href='{% url 'event_edit' event.id %}'" class="edit-btn">Etkinliği Düzenle</button>
+            <button onclick="window.location.href='{% url 'event_list' %}'" class="back-btn">Etkinlik Listesine Geri Dön</button>
+            <button onclick="window.location.href='{% url 'chat:messaging_panel' event.id %}'" class="chat-btn">Sohbete Katıl</button>
         </div>
     </div>
     <script src="{% static 'js/event_detail.js' %}"></script>

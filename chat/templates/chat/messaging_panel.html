@@ -10,7 +10,7 @@
 <body>
     <div class="chat-container">
         <header>
-            <h1>Chat for {{ event.name }}</h1>
+            <h1> {{ event.name }} İçin sohbet kutusu</h1>
         </header>
 
         <main id="messageHistory">
@@ -28,8 +28,8 @@
         <footer>
             <form id="messageForm" method="POST">
                 {% csrf_token %}
-                <textarea name="content" id="content" placeholder="Write your message..." required></textarea>
-                <button type="submit" class="send-button">Send</button>
+                <textarea name="content" id="content" placeholder="Mesajınızı yazın..." required></textarea>
+                <button type="submit" class="send-button">Gönder</button>
             </form>
         </footer>
     </div>

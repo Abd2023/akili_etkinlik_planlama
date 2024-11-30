@@ -9,23 +9,23 @@
 </head>
 <body>
     <div class="container">
-        <h1>Admin Dashboard</h1>
+        <h1>Yönetici Kontrol Paneli</h1>
         <div class="stats">
             <div class="stat-card">
-                <h2>Total Users</h2>
+                <h2>Toplam Kullanıcı Sayısı</h2>
                 <p>{{ total_users }}</p>
             </div>
             <div class="stat-card">
-                <h2>Total Events</h2>
+                <h2>Toplam Etkinlik Sayısı</h2>
                 <p>{{ total_events }}</p>
             </div>
             <div class="stat-card">
-                <h2>Active Events</h2>
+                <h2>Aktif Etkinlikler</h2>
                 <p>{{ active_events }}</p>
             </div>
         </div>
 
-        <h2>Top 10 Users by Points</h2>
+        <h2>Puanlara göre ilk 10 kullanıcı</h2>
         <ul class="user-list">
             {% for user in top_users_by_points %}
                 <li>
