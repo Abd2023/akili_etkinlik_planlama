@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'user_management.CustomUser'
 
 LOGIN_URL = '/login/'  # Update this to your login page URL
-
+ # Admin giriş URL'si
 LOGIN_REDIRECT_URL = '/home/'
 
 LOGOUT_REDIRECT_URL = '/login/'  # Redirect after successful logout

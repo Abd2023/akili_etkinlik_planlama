@@ -1,12 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 </head>
 <body>
     <h1>Welcome to the Admin Dashboard</h1>
-    <p>This page is accessible only by superusers.</p>
-    <!-- Add more admin functionalities here -->
+    <p>Total Users: {{ total_users }}</p>
+    <p>Total Events: {{ total_events }}</p>
+    <p>Active Events: {{ active_events }}</p>
+
+    <a href="{% url 'admin_manage_users' %}">Manage Users</a> |
+    <a href="{% url 'admin_manage_events' %}">Manage Events</a>
+    <a href="{% url 'admin_report' %}">Manage Events</a>
 </body>
 </html>

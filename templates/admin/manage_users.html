@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcıları Yönet</title>
+    <link rel="stylesheet" href="{% static 'css/manage_users.css' %}">
+    <script>
+        function confirmDeletion(url) {
+            if (confirm("Bu kullanıcıyı silmek istediğinizden emin misiniz?")) {
+                window.location.href = url; // Onaylandıysa URL'ye yönlendir
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Kullanıcıları Yönet</h1>
+        </header>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kullanıcı Adı</th>
+                    <th>E-posta</th>
+                    <th>Katıldığı Etkinlikler</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in user_event_data %}
+                <tr>
+                    <td>{{ data.user.username }}</td>
+                    <td>{{ data.user.email }}</td>
+                    <td>
+                        {% if data.events %}
+                            <div class="event-badges">
+                                {% for event in data.events %}
+                                <span class="event-badge">{{ event.name }} ({{ event.date }})</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <span class="no-events">Katıldığı etkinlik yok.</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button class="delete-btn" onclick="confirmDeletion('{% url 'delete_user' data.user.id %}')">Sil</button>
+                        <a href="{% url 'admin_update_user' data.user.id %}" class="edit-btn">Düzenle</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -28,7 +28,8 @@ from django.conf.urls.static import static  # Import static settings
 
 urlpatterns = [
     path('', login, name='login'),
-    path('admin/', custom_admin_site.urls),  # Use the custom admin site
+    path('admin/', include('admin_panel.urls')),
+    #path('admin/', custom_admin_site.urls),  # Use the custom admin site
     path('user/', include('user_management.urls')),  # This includes user_management URLs
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),  # Use Django's default login template
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),

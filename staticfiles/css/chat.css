@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 99%;
+    max-width: 1400px;
+    height: 99%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+header {
+    background: #ff7043;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+main {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.message {
+    padding: 5px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    font-size: 0.9rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.message.animate {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.message .sender {
+    font-weight: bold;
+    color: #ff7043;
+}
+
+.message .content {
+    margin-top: 5px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.message .timestamp {
+    font-size: 0.8rem;
+    color: #888;
+    align-self: flex-end;
+}
+
+footer {
+    background: #f1f1f1;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+textarea {
+    flex: 1;
+    padding: 1px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: none;
+    font-family: Arial, sans-serif;
+    height: 50px;
+    
+}
+textarea:focus {
+    border-color: #ff7043; /* Odaklanınca renk değişimi */
+    outline: none; /* Varsayılan odak hatlarını kaldır */
+    box-shadow: 0 0 5px rgba(255, 112, 67, 0.5); /* Hafif bir parlama efekti */
+}
+
+.send-button {
+    padding: 10px 20px;
+    background: #ff7043;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.send-button:hover {
+    background: #e63e24;
+}
+
+.no-messages {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+body.fade-out {
+    animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

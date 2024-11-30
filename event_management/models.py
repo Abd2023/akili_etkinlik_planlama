@@ -14,7 +14,8 @@ class Event(models.Model):
     description = models.TextField(null=True, blank=True)
     latitude = models.FloatField(default=0.0)
     longitude = models.FloatField(default=0.0)
-    image = models.ImageField(upload_to='event_images/', null=True, blank=True)  # New field for event images
+    image = models.ImageField(upload_to='event_images/', null=True, blank=True)  
+   
 
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

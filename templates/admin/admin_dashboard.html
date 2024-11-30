@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Welcome to the Admin Dashboard</h1>
+        <div class="stats">
+            <div class="stat-card">
+                <strong>Total Users:</strong> {{ total_users }}
+            </div>
+            <div class="stat-card">
+                <strong>Total Events:</strong> {{ total_events }}
+            </div>
+        </div>
+    </header>
+    <main class="event-container">
+        <h2>All Events</h2>
+        <div class="event-grid">
+            {% for event in events %}
+            <div class="event-card">
+                <h3>{{ event.name }}</h3>
+                <p><strong>Date:</strong> {{ event.date }}</p>
+                <p><strong>Location:</strong> {{ event.location }}</p>
+                <div class="event-actions">
+                    <a href="{% url 'event_detail' event.id %}" class="details-btn">Details</a>
+                    <a href="{% url 'event_edit' event.id %}" class="edit-btn">Edit</a>
+                    <a href="{% url 'delete_event' event.id %}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    <footer class="actions">
+        
+        <a href="{% url 'manage_users' %}" class="action-btn">Manage Users</a>
+        <a href="{% url 'admin_report' %}" class="action-btn">Reports</a>
+    </footer>
+</body>
+</html>
