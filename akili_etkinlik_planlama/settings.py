@@ -107,7 +107,7 @@ EMAIL_USE_SSL = False  # Ensure this is False, as you're using TLS
 EMAIL_HOST_USER = 'testsifreunuttum@gmail.com'
 EMAIL_HOST_PASSWORD = 'xirn fvkl vcic yujt'  # Your email password
 
-DEFAULT_FROM_EMAIL = 'Your App <noreply@yourdomain.com>'
+DEFAULT_FROM_EMAIL = 'Akili Etkinlik Planlama Sistemi <noreply@yourdomain.com>'
 
 
 import logging

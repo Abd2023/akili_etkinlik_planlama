@@ -179,3 +179,24 @@ body {
 .nav-actions a.map-button:hover {
     background-color: #45a049; /* Slightly darker green on hover */
 }
+
+
+
+.logout-button {
+    background-color: #ff6f61; /* Match the design theme */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px; /* Add margin for spacing */
+}
+
+.logout-button:hover {
+    background-color: #e65a50; /* Slightly darker shade on hover */
+    transition: background-color 0.3s ease;
+}
