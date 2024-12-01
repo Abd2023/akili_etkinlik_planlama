@@ -6,13 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kullanıcıları Yönet</title>
     <link rel="stylesheet" href="{% static 'css/manage_users.css' %}">
-    <script>
-        function confirmDeletion(url) {
-            if (confirm("Bu kullanıcıyı silmek istediğinizden emin misiniz?")) {
-                window.location.href = url; // Onaylandıysa URL'ye yönlendir
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container">
@@ -45,8 +38,15 @@
                         {% endif %}
                     </td>
                     <td>
-                        <button class="delete-btn" onclick="confirmDeletion('{% url 'delete_user' data.user.id %}')">Sil</button>
-                        <a href="{% url 'admin_update_user' data.user.id %}" class="edit-btn">Düzenle</a>
+                        <div class="action-buttons">
+                            <a href="{% url 'delete_user' data.user.id %}" class="delete-btn">Sil</a>
+                            <a href="{% url 'admin_update_user' data.user.id %}" class="edit-btn">Düzenle</a>
+                            {% if not data.user.is_superuser %}
+                            <a href="{% url 'toggle_admin' data.user.id %}" class="admin-btn">Admin Yap</a>
+                            {% else %}
+                                <a href="{% url 'toggle_admin' data.user.id %}" class="admin-btn remove-admin">Admini Kaldır</a>
+                            {% endif %}
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}

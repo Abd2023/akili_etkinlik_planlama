@@ -131,7 +131,7 @@ def admin_update_user(request, user_id):
 @login_required
 @user_passes_test(is_superuser)
 def manage_users(request):
-    users = CustomUser.objects.filter(is_superuser=False)  # Süper kullanıcıları hariç tut
+    users = CustomUser.objects.all()  # Süper kullanıcıları hariç tut
     user_event_data = []
 
     for user in users:
@@ -147,5 +147,16 @@ def manage_users(request):
     }
     return render(request, 'admin/manage_users.html', context)
 
-
+@login_required
+@user_passes_test(is_superuser)
+def toggle_admin_status(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
+    if user.is_superuser:
+        user.is_superuser = False
+        messages.success(request, f"{user.username} artık admin değil.")
+    else:
+        user.is_superuser = True
+        messages.success(request, f"{user.username} artık admin.")
+    user.save()
+    return redirect('manage_users')
 

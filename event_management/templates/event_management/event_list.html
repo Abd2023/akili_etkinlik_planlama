@@ -11,9 +11,9 @@
     {% if user.is_authenticated %}
         <div class="navbar">
             <h1>Hoş geldin, {{ user.username }}</h1>
-            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+            
             <a href="{% url 'event_create' %}" class="create-event-button">Yeni Bir Etkinlik Oluştur</a>
-            <a href="{% url 'home' %}" class="back-button">Ana Sayfaya Dön</a>
+            
         </div>
     {% else %}
         <p>Yapmanız gerekenler <a href="{% url 'login' %}">Oturum açma</a> Bu sayfaya erişmek için.</p>
