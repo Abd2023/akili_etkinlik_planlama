@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
-    <!-- Navbar -->
+    
     <div class="navbar">
         <h1>Hoş geldin, {{ user.username }}</h1>
         <div class="nav-actions">
             <a href="{% url 'profile' %}" class="profile-button">Profil</a>
             <a href="{% url 'event_create' %}" class="create-event-button">Etkinlik Oluştur</a>
 
-            <!-- Modified Logout Button -->
+            
             <form action="{% url 'logout' %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit" class="logout-button">Oturum kapatma</button>
@@ -25,12 +25,12 @@
         </div>
     </div>
 
-    <!-- View All Events Button -->
+    
     <div class="all-events-container">
         <a href="{% url 'event_list' %}" class="all-events-button">Tüm Etkinlikleri Görüntüle</a>
     </div>
 
-    <!-- Recommended Events -->
+    
     <div class="section">
         <h2>Önerilen Etkinlikler</h2>
         <div class="events-grid">
@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <!-- Your Events -->
+   
     <div class="section">
         <h2>Sizin Etkinlikleriniz</h2>
         <div class="events-grid">

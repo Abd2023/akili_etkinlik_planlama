@@ -20,7 +20,7 @@ def register(request):
             login(request, user)
             return redirect('home')
     else:
-        # Get initial data from query parameters
+        
         initial_data = QueryDict(request.META['QUERY_STRING'])
         form = CustomUserCreationForm(initial={
             'username': initial_data.get('username', ''),
@@ -47,7 +47,7 @@ def admin_dashboard(request):
 
 @login_required
 def profile(request):
-    # Check if the user is an admin
+   
     if request.user.is_superuser:
         return redirect('admin_dashboard')
     else:
@@ -62,7 +62,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')  # Kullanıcıyı 'home' sayfasına yönlendirir
+            return redirect('home')  
         else:
             messages.error(request, "Geçersiz kullanıcı adı veya şifre!")
     return render(request, 'login_register.html')

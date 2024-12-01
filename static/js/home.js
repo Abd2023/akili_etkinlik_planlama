@@ -63,11 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'left') {
-                        // Sol tarafa kaydırma animasyonu
+                      
                         eventItem.classList.add('slide-left');
 
                         setTimeout(() => {
-                            // "General Events" kısmına taşı
+                            
                             const generalEventsList = document.querySelector('#general-events-list');
                             eventItem.classList.remove('slide-left');
                             eventItem.innerHTML = `
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <button class="join-button" data-event-id="${data.event_id}">Katıl</button>
                             `;
                             generalEventsList.appendChild(eventItem);
-                        }, 500); // Animasyonun süresiyle senkronize
+                        }, 500); 
                     }
                 });
         });
@@ -85,18 +85,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const map = L.map('map').setView([39.9208, 32.8541], 6); // Default location: Ankara// Add OpenStreetMap tiles
+    const map = L.map('map').setView([39.9208, 32.8541], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
     }).addTo(map);
 
-    // Example events
+    
     const events = [
         { name: 'Rock Concert', latitude: 39.9208, longitude: 32.8541, location: 'Ankara', description: 'A great concert' },
         { name: 'Art Exhibition', latitude: 41.0082, longitude: 28.9784, location: 'Istanbul', description: 'A wonderful exhibition' },
     ];
 
-    // Add markers for events
+    
     events.forEach(event => {
         const marker = L.marker([event.latitude, event.longitude]).addTo(map).bindPopup(`
             <div>
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `);
     });
 
-    // Route Planning
+    
     const startMarker = L.marker([39.9208, 32.8541], { draggable: true }).addTo(map).bindPopup('Start');
     const endMarker = L.marker([41.0082, 28.9784], { draggable: true }).addTo(map).bindPopup('End');
 

@@ -1,4 +1,4 @@
-// Highlight fields on focus
+
 document.querySelectorAll('input, textarea, select').forEach(input => {
     input.addEventListener('focus', () => {
         input.style.borderColor = '#FF4B2B';
@@ -8,11 +8,11 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
     });
 });
 
-// Submit form and handle response
+
 const form = document.querySelector('form');
 
 form.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent default submission
+    event.preventDefault(); 
 
     const formData = new FormData(form);
 
@@ -24,7 +24,7 @@ form.addEventListener('submit', async (event) => {
 
         if (response.ok) {
             alert("Registration Successful!");
-            form.reset(); // Clear form fields
+            form.reset(); 
         } else {
             const errors = await response.json();
             alert("Registration Failed: " + JSON.stringify(errors));

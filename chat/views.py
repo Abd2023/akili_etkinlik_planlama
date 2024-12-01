@@ -24,7 +24,7 @@ def send_message(request):
     Validate that the user is a participant of the event before sending the message.
     """
     try:
-        # Parse JSON request body
+        
         data = json.loads(request.body)
         event_id = data.get("event_id")
         content = data.get("content")
@@ -32,15 +32,15 @@ def send_message(request):
         if not event_id or not content:
             return JsonResponse({"error": "Event ID and message content are required."}, status=400)
 
-        # Get the event
+        
         event = get_object_or_404(Event, id=event_id)
 
-        # Check if the user is a participant
+        
         is_participant = Participant.objects.filter(event=event, user=request.user).exists()
         if not is_participant:
             return JsonResponse({"error": "You are not a participant of this event."}, status=403)
 
-        # Save the message
+        
         message = Message.objects.create(event=event, sender=request.user, content=content)
         return JsonResponse({"success": True, "message_id": message.id, "timestamp": message.timestamp}, status=201)
     except json.JSONDecodeError:
@@ -54,18 +54,18 @@ def get_messages(request, event_id):
     Paginate messages if the event has a large number of messages.
     """
     try:
-        # Get the event
+        
         event = get_object_or_404(Event, id=event_id)
 
-        # Fetch messages
+       
         messages = Message.objects.filter(event=event).order_by("-timestamp")
 
-        # Paginate messages
-        paginator = Paginator(messages, 20)  # 20 messages per page
+        
+        paginator = Paginator(messages, 20)  
         page_number = request.GET.get("page", 1)
         page = paginator.get_page(page_number)
 
-        # Serialize messages
+        
         message_data = [
             {
                 "sender": message.sender.username,
@@ -89,12 +89,12 @@ def get_messages(request, event_id):
 def messaging_panel(request, event_id):
     event = get_object_or_404(Event, id=event_id)
 
-    # Mark messages as read
+   
     unread_messages = event.messages.exclude(read_by=request.user)
     for message in unread_messages:
         message.read_by.add(request.user)
 
-    messages = event.messages.order_by('timestamp')  # Fetch all messages for the event
+    messages = event.messages.order_by('timestamp')  
     return render(request, 'chat/messaging_panel.html', {'event': event, 'messages': messages})
 
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Message
-from admin_panel.admin import custom_admin_site  # Use the custom admin site
+from admin_panel.admin import custom_admin_site  
 
 @admin.register(Message, site=custom_admin_site)
 class MessageAdmin(admin.ModelAdmin):
@@ -9,4 +9,4 @@ class MessageAdmin(admin.ModelAdmin):
     search_fields = ('content', 'sender__username', 'event__name')
     ordering = ('-timestamp',)
     fields = ('event', 'sender', 'content', 'timestamp')
-    readonly_fields = ('timestamp',)  # Ensure timestamp is not editable manually
+    readonly_fields = ('timestamp',)  

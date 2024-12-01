@@ -3,18 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingSpinner = document.querySelector('.loading-spinner');
 
     try {
-        // Safely parse event data
+        
         const eventsDataElement = document.getElementById('events-data');
         const events = JSON.parse(eventsDataElement.textContent || '[]');
 
         const map = L.map('map').setView([39.9208, 32.8541], 6);
 
-        // Add OpenStreetMap tiles
+       
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
         }).addTo(map);
 
-        // Add event markers
+        
         events.forEach(event => {
             if (event.latitude && event.longitude) {
                 L.marker([event.latitude, event.longitude])
@@ -30,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Start and Destination markers
+        
         const startMarker = L.marker([39.9208, 32.8541], { draggable: true }).addTo(map).bindPopup('Start Location');
         const endMarker = L.marker([39.914, 32.850], { draggable: true }).addTo(map).bindPopup('Destination');
 
-        // Handle route finding
+       
         document.getElementById('findRoute').addEventListener('click', () => {
             const start = startMarker.getLatLng();
             const end = endMarker.getLatLng();

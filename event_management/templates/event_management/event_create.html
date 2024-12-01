@@ -13,7 +13,7 @@
         <form id="eventCreateForm" method="post">
             {% csrf_token %}
 
-            <!-- Display Non-Field Errors (e.g., Time Conflicts) -->
+          
             {% if form.non_field_errors %}
                 <ul class="errorlist">
                     {% for error in form.non_field_errors %}

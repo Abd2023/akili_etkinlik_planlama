@@ -93,9 +93,9 @@ textarea {
     
 }
 textarea:focus {
-    border-color: #ff7043; /* Odaklanınca renk değişimi */
-    outline: none; /* Varsayılan odak hatlarını kaldır */
-    box-shadow: 0 0 5px rgba(255, 112, 67, 0.5); /* Hafif bir parlama efekti */
+    border-color: #ff7043; 
+    outline: none; 
+    box-shadow: 0 0 5px rgba(255, 112, 67, 0.5);
 }
 
 .send-button {

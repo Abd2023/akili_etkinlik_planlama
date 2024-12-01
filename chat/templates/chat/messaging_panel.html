@@ -60,11 +60,11 @@
             });
 
             if (response.ok) {
-                // Yenilemeden önce bir animasyon tetikleyebilirsiniz.
+                
                 document.body.classList.add("fade-out");
                 setTimeout(() => {
-                    window.location.reload(); // Sayfayı yenile
-                }, 300); // Animasyon süresini bekle
+                    window.location.reload(); 
+                }, 300); 
             } else {
                 alert("Error sending message. Please try again.");
             }

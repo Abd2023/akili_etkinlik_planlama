@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container" id="container">
-        <!-- Sol Panel -->
+      
         <div class="form-container sign-up-container">
             <form id="register-form">
                 <h1>Hesap Oluştur</h1>
@@ -18,7 +18,7 @@
                 <button type="button" id="register-button">Kayıt Ol</button>
             </form>
         </div>
-        <!-- Sağ Panel -->
+        
         <div class="form-container sign-in-container">
             <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
@@ -26,7 +26,7 @@
                 <input type="text" name="username" placeholder="Kullanıcı Adı" required />
                 <input type="password" name="password" placeholder="Şifre" required />
                 <button type="submit">Giriş Yap</button>
-                <!-- Forgot Password Link -->
+                
                 <p style="margin-top: 10px;">
                     <a href="{% url 'password_reset' %}" style="color: #FF4B2B; text-decoration: none; font-weight: bold;">
                         Şifrenizi mi unuttunuz?
@@ -34,7 +34,7 @@
                 </p>
             </form>
         </div>
-        <!-- Overlay Panel -->
+        
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
@@ -56,7 +56,7 @@
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
 
-            // Redirect to register page with query parameters
+           
             const queryString = `?username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
             window.location.href = `/user/register/${queryString}`;
         });

@@ -1,4 +1,4 @@
-# user_management/decorators.py
+
 
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect

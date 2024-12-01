@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
-from event_management.models import Event, Participant  # Import related models
+from event_management.models import Event, Participant  
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
@@ -36,7 +36,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     total_points = models.IntegerField(default=0)
     first_participation_bonus_awarded = models.BooleanField(default=False)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')  # Added inside the class
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')  
 
     def calculate_total_points(self):
         """

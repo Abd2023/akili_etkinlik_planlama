@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -47,13 +47,13 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'user_management.CustomUser'
 
-LOGIN_URL = '/login/'  # Update this to your login page URL
- # Admin giriş URL'si
+LOGIN_URL = '/login/' 
+ 
 LOGIN_REDIRECT_URL = '/home/'
 
-LOGOUT_REDIRECT_URL = '/login/'  # Redirect after successful logout
+LOGOUT_REDIRECT_URL = '/login/'  
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Sessions expire when the browser is closed
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/map.css' %}"> <!-- Include your custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/map.css' %}"> 
 </head>
 <body>
     <header>
@@ -17,7 +17,7 @@
             <a href="{% url 'event_list' %}">Tüm Etkinlikler</a>
             <a href="{% url 'profile' %}">Profil</a>
 
-            <!-- Modified Logout Button -->
+            
             <form action="{% url 'logout' %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit">Oturum Kapatma</button>

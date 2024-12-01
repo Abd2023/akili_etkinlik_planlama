@@ -11,38 +11,38 @@ from django.contrib.auth import get_user_model
 
 from user_management.forms import ProfileUpdateForm
 from django.contrib.auth.models import User
-# Süper kullanıcı kontrolü
+
 def is_superuser(user):
     return user.is_superuser
 
 
-# Admin login view
+
 def admin_login(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
 
-        if user is not None and user.is_superuser:  # Süper kullanıcı kontrolü
+        if user is not None and user.is_superuser: 
             login(request, user)
-            return redirect('admin_dashboard')  # Admin dashboard'a yönlendir
+            return redirect('admin_dashboard')  
         else:
             messages.error(request, "Sadece admin kullanıcıları giriş yapabilir!")
-            return redirect('admin_login')  # Sayfayı yeniden yükle
+            return redirect('admin_login')  
 
-    return render(request, 'admin/admin_login.html')  # Admin login şablonu
+    return render(request, 'admin/admin_login.html') 
 
 
 @login_required
 @user_passes_test(is_superuser)
 def admin_dashboard(request):
-    # Kullanıcı ve etkinlik istatistiklerini al
+    
     total_users = CustomUser.objects.count()
     total_events = Event.objects.count()
 
-    # Kullanıcılar ve etkinliklerle ilgili detaylar
+    
     users = CustomUser.objects.annotate(event_count=Count('event'))
-    events = Event.objects.all()  # Tüm etkinlikleri al
+    events = Event.objects.all()  
 
     context = {
         'total_users': total_users,
@@ -64,9 +64,9 @@ def delete_user(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
     user.delete()
     messages.success(request, "Kullanıcı başarıyla silindi.")
-    return redirect('manage_users')  # Buradaki isim doğru URL pattern'e uygun olmalı
+    return redirect('manage_users')  
 
-# Etkinlik yönetimi
+
 @login_required
 @user_passes_test(is_superuser)
 def manage_events(request):
@@ -92,12 +92,12 @@ def manage_events(request):
     return render(request, 'admin/manage_events.html', context)
 
 
-# Event details view
+
 def event_details(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     return render(request, 'admin/event_details.html', {'event': event})
 
-# Edit event view
+
 def edit_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     if request.method == 'POST':
@@ -108,14 +108,14 @@ def edit_event(request, event_id):
         return redirect('admin_dashboard')
     return render(request, 'admin/edit_event.html', {'event': event})
 
-# Delete event view
+
 def delete_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     event.delete()
     return redirect('admin_dashboard')
 
 
-User = get_user_model()  # Özel kullanıcı modelini destekler
+User = get_user_model()  
 
 def admin_update_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
@@ -131,11 +131,11 @@ def admin_update_user(request, user_id):
 @login_required
 @user_passes_test(is_superuser)
 def manage_users(request):
-    users = CustomUser.objects.all()  # Süper kullanıcıları hariç tut
+    users = CustomUser.objects.all()  
     user_event_data = []
 
     for user in users:
-        # Participant modelinden kullanıcıya bağlı etkinlikleri çekiyoruz
+        
         events = Event.objects.filter(participants__user=user)
         user_event_data.append({
             'user': user,

@@ -30,7 +30,7 @@ class Event(models.Model):
             location=self.location,
             start_time__lt=self.end_time,
             end_time__gt=self.start_time,
-        ).exclude(id=self.id)  # Exclude the current event when editing
+        ).exclude(id=self.id) 
 
         if overlapping_events.exists():
             raise ValidationError(
@@ -38,7 +38,7 @@ class Event(models.Model):
             )
 
     def save(self, *args, **kwargs):
-        # Ensure clean method is called before saving
+       
         self.clean()
         super().save(*args, **kwargs)
 

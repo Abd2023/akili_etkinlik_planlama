@@ -1,6 +1,6 @@
 from django.contrib.admin import AdminSite
 from django.urls import path
-from event_management.admin_views import admin_report  # Import the custom admin report view
+from event_management.admin_views import admin_report  
 
 class CustomAdminSite(AdminSite):
     site_header = "Event Management Admin"
@@ -10,9 +10,9 @@ class CustomAdminSite(AdminSite):
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
-            path('reports/', admin_report, name='admin_report'),  # Custom reports URL
+            path('reports/', admin_report, name='admin_report'), 
         ]
         return custom_urls + urls
 
-# Instantiate the custom admin site
+
 custom_admin_site = CustomAdminSite(name='custom_admin')

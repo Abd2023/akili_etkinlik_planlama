@@ -24,20 +24,20 @@ def home_view(request):
 def home(request):
     user = request.user
 
-    # Kullanıcının katıldığı etkinlikler
+    
     user_participated_event_ids = Participant.objects.filter(user=user).values_list('event_id', flat=True)
 
-    # Önerilen etkinlikler
+   
     user_interests = user.interests.split(", ") if user.interests else []
     recommended_events = Event.objects.filter(category__in=user_interests).exclude(id__in=user_participated_event_ids)
 
-    # Genel etkinlikler (önerilen ve katıldığı etkinlikler hariç)
+    
     general_events = Event.objects.exclude(id__in=recommended_events.values_list('id', flat=True)).exclude(id__in=user_participated_event_ids)
 
-    # Kullanıcının katıldığı etkinlikler
+    
     user_events = Event.objects.filter(id__in=user_participated_event_ids)
 
-    # Şablona veriler gönderiliyor
+    
     context = {
         'user': user,
         'recommended_events': recommended_events,
@@ -52,16 +52,16 @@ def home(request):
 
 
 
-# Function to check time conflicts
+
 def check_time_conflicts(new_event):
     """
     Check if the new or updated event conflicts with existing events.
     """
     overlapping_events = Event.objects.filter(
-        date=new_event.date,  # Same date
-        start_time__lt=new_event.end_time,  # Overlaps with start time
-        end_time__gt=new_event.start_time  # Overlaps with end time
-    ).exclude(id=new_event.id)  # Exclude the event itself (useful for editing)
+        date=new_event.date,  
+        start_time__lt=new_event.end_time,  
+        end_time__gt=new_event.start_time  
+    ).exclude(id=new_event.id)  
     return overlapping_events.exists()
 
 
@@ -69,7 +69,7 @@ def check_time_conflicts(new_event):
 @login_required
 def event_create(request):
     if request.method == 'POST':
-        form = EventForm(request.POST, request.FILES)  # Include request.FILES
+        form = EventForm(request.POST, request.FILES)  
         if form.is_valid():
             event = form.save(commit=False)
             event.created_by = request.user
@@ -110,8 +110,8 @@ def join_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     participant, created = Participant.objects.get_or_create(user=request.user, event=event)
 
-    if created:  # Eğer kullanıcı daha önce katılmamışsa
-        request.user.total_points += 10  # Katılım puanı ekle
+    if created:  
+        request.user.total_points += 10  
         request.user.save()
 
     return redirect('/home/')
@@ -132,7 +132,7 @@ def event_detail(request, event_id):
 def event_edit(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     if request.method == 'POST':
-        form = EventForm(request.POST, request.FILES, instance=event)  # Include request.FILES
+        form = EventForm(request.POST, request.FILES, instance=event)  
         if form.is_valid():
             updated_event = form.save(commit=False)
             if check_time_conflicts(updated_event):
@@ -154,9 +154,9 @@ def get_route(request):
     start = request.GET.get('start')
     end_lat = request.GET.get('end_lat')
     end_lng = request.GET.get('end_lng')
-    mode = request.GET.get('mode', 'driving')  # Default to driving
+    mode = request.GET.get('mode', 'driving')  
 
-    api_key = "5b3ce3597851110001cf6248b6e2696755f94c61bb3be94cc88b13d1"  # Replace with your API key
+    api_key = "5b3ce3597851110001cf6248b6e2696755f94c61bb3be94cc88b13d1"  
     url = f"https://api.openrouteservice.org/v2/directions/{mode}"
     headers = {"Authorization": api_key}
     params = {
@@ -175,6 +175,6 @@ def get_route(request):
 def event_map(request):
     events = Event.objects.values('name', 'latitude', 'longitude', 'location', 'date', 'start_time', 'description')
     
-    #print(list(events))  # Ensure this outputs the expected data
+    
     events_serialized = json.dumps(list(events), cls=DjangoJSONEncoder) 
     return render(request, 'event_management/map.html', {'events': events_serialized})

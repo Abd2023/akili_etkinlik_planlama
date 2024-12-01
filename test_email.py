@@ -3,11 +3,11 @@ from django.conf import settings
 import django
 import os
 
-# Set up Django environment
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'akili_etkinlik_planlama.settings')
 django.setup()
 
-# Test email function
+
 def test_email():
     send_mail(
         'Test Email',
